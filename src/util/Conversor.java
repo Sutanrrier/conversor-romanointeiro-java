@@ -11,15 +11,20 @@ public class Conversor {
 		String aux = romanNumber + "F"; //Adiciona um char no final do numero. Usado na hora de fazer as condicoçs do 'for'.
 		while(aux.charAt(i) != 'F') {
 			for(i=0;i<aux.length() - 1;i++) {
+				
 				char pos1 = aux.charAt(i);
 				char pos2 = aux.charAt(i+1);
+				
+				if(pos1 != 'I' && pos1 != 'V' && pos1 != 'X' && pos1 != 'L' && pos1 != 'C' && pos1 != 'D' && pos1 != 'M') {
+					throw new ConversorException("Número romano inválido!");
+				}
 				
 				//Chars 'L', 'V' e 'D' não pode repetir ou virem acompanhados de números maiores que o mesmo.
 				if((pos1 == 'L' && pos2 == 'L') || (pos1 == 'V' && pos2 == 'V') || (pos1 == 'D' && pos2 == 'D')){
 					throw new ConversorException("Número romano inválido!");
 				}
 				
-				if((pos1 == 'V' && pos2 != 'I') || (pos1 == 'L' && (pos2 != 'V' && pos2 != 'I')) || (pos1 == 'D' && pos2 == 'M')) {
+				if((pos1 == 'V' && (pos2 != 'I' && pos2 != 'F')) || (pos1 == 'L' && (pos2 != 'V' && pos2 != 'I')) || (pos1 == 'D' && pos2 == 'M')) {
 					throw new ConversorException("Número romano inválido!");
 				}
 				
